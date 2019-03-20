@@ -1,5 +1,16 @@
 todo <- read.csv("todo.csv")
 summary(todo)
+#histogramas
+hist(todo$X)
+hist(todo$AÃ.o)
+hist(todo$Cantidad.total)
+#tablas de normalidad
+qqnorm(todo$X)
+qqline(todo$X, col = "steelblue", lwd = 2)
+qqnorm(todo$AÃ.o)
+qqline(todo$AÃ.o, col = "steelblue", lwd = 2)
+qqnorm(todo$Cantidad.total)
+qqline(todo$Cantidad.total, col = "steelblue", lwd = 2)
 #Se muestra la tabla de frecuencia de departamento
 departamentofreq <- with(todo, table(Departamento))
 margin.table(departamentofreq,1)
