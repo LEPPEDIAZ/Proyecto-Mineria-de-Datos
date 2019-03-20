@@ -72,3 +72,14 @@ plot(hc) #Genera el dendograma
 rect.hclust(hc,k=3) #Dibuja el corte de los grupos en el gráfico
 groups<-cutree(hc,k=3) #corta el dendograma, determinando el grupo de cada fila
 datos$gruposHC<-groups
+#exploratorio
+summary(todo)
+orden <- order(todo$Cantidad.total, decreasing = T)
+head(todo[orden,]$diagnostico,n=1)
+#segunda pregunta
+library(epiDisplay)
+tab1(todo$diagnostico, sort.group = "decreasing", cum.percent = TRUE)
+#enfermedad mas repetida
+names(which.max(table(todo$diagnostico)))
+#departamento mas suministrado
+names(which.max(table(todo$Departamento)))
