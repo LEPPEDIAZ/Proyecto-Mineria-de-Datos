@@ -1,5 +1,15 @@
 todo <- read.csv("todo.csv")
+colnames(todo)<-c("x", "ao","mes","depto","cie","diagnostico","grupoedad","genero","cantidad")
 summary(todo)
+
+todo$numero_mes<- as.numeric(todo$mes)
+todo$numero_dep<- as.numeric(todo$depto)
+todo$numero_cie<- as.numeric(todo$cie)
+todo$numero_diag<- as.numeric(todo$diagnostico)
+todo$numero_grupoedad<- as.numeric(todo$grupoedad)
+todo$numero_gen<- as.numeric(todo$genero)
+
+todo
 #histogramas
 hist(todo$X)
 hist(todo$AÃ.o)
@@ -11,6 +21,8 @@ qqnorm(todo$AÃ.o)
 qqline(todo$AÃ.o, col = "steelblue", lwd = 2)
 qqnorm(todo$Cantidad.total)
 qqline(todo$Cantidad.total, col = "steelblue", lwd = 2)
+
+
 #Se muestra la tabla de frecuencia de departamento
 departamentofreq <- with(todo, table(Departamento))
 margin.table(departamentofreq,1)
@@ -35,8 +47,23 @@ library(mclust) #mixtures of gaussians
 library(fpc) #para hacer el plotcluster
 library(NbClust) #Para determinar el n�mero de clusters �ptimo
 library(factoextra) #Para hacer gr�ficos bonitos de clustering
+library(cluster) #Para calcular la silueta
+library(e1071)#para cmeans
+library(mclust) #mixtures of gaussians
+library(fpc) #para hacer el plotcluster
+library(NbClust) #Para determinar el n?mero de clusters ?ptimo
+library(factoextra) #Para hacer gr?ficos bonitos de clustering
+library(rpart)
+library(caret)
+library(tree)
+library(rpart.plot)
+library(randomForest)
 #gaussiano
-mc<-Mclust(datos[,1:4],3)
+datos<- todo
+
+
+
+mc<-Mclust(datos[,9:16],3)
 plot(mc, what = "classification", main="MClust Classification")
 datos$mxGau<-mc$classification
 g1MC<-datos[datos$mxGau==1,]
@@ -45,7 +72,10 @@ g3MC<-datos[datos$mxGau==3,]
 #cluster k-medias
 datos<- todo
 irisCompleto<-todo[complete.cases(todo),]
-km<-kmeans(todo[,1:4],3)
+todo
+todo<- na.omit(todo)
+km<-kmeans(todo[,9:15],3)
+
 datos$grupo<-km$cluster
 
 g1<- datos[datos$grupo==1,]
@@ -58,7 +88,7 @@ prop.table(table(g2$diagnostico))*100
 g3<- datos[datos$grupo==3,]
 prop.table(table(g3$diagnostico))*100
 
-plotcluster(iris[,1:4],km$cluster) #grafica la ubicación de los clusters
+plotcluster(todo[,9:15],km$cluster) #grafica la ubicación de los clusters
 #Error in eigen(m, symmetric = TRUE) : infinite or missing values in 'x'
 #c-means
 my_data2 <- todo[, c(9, 1, 2, 7, 3, 4, 5, 6, 8)]
@@ -72,14 +102,3 @@ plot(hc) #Genera el dendograma
 rect.hclust(hc,k=3) #Dibuja el corte de los grupos en el gráfico
 groups<-cutree(hc,k=3) #corta el dendograma, determinando el grupo de cada fila
 datos$gruposHC<-groups
-#exploratorio
-summary(todo)
-orden <- order(todo$Cantidad.total, decreasing = T)
-head(todo[orden,]$diagnostico,n=1)
-#segunda pregunta
-library(epiDisplay)
-tab1(todo$diagnostico, sort.group = "decreasing", cum.percent = TRUE)
-#enfermedad mas repetida
-names(which.max(table(todo$diagnostico)))
-#departamento mas suministrado
-names(which.max(table(todo$Departamento)))
