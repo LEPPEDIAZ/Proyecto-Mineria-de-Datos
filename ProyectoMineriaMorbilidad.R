@@ -69,6 +69,9 @@ datos$mxGau<-mc$classification
 g1MC<-datos[datos$mxGau==1,]
 g2MC<-datos[datos$mxGau==2,]
 g3MC<-datos[datos$mxGau==3,]
+#silueta gaussiano
+silmg<-silhouette(mc$classification,dist(datos[,9:16]))
+mean(silmg[,3])
 #cluster k-medias
 datos<- todo
 irisCompleto<-todo[complete.cases(todo),]
