@@ -9,6 +9,8 @@ todo$numero_diag<- as.numeric(todo$diagnostico)
 todo$numero_grupoedad<- as.numeric(todo$grupoedad)
 todo$numero_gen<- as.numeric(todo$genero)
 
+todo <- na.omit(todo)
+
 todo
 #histogramas
 hist(todo$X)
@@ -69,9 +71,6 @@ datos$mxGau<-mc$classification
 g1MC<-datos[datos$mxGau==1,]
 g2MC<-datos[datos$mxGau==2,]
 g3MC<-datos[datos$mxGau==3,]
-#silueta gaussiano
-silmg<-silhouette(mc$classification,dist(datos[,9:16]))
-mean(silmg[,3])
 #cluster k-medias
 datos<- todo
 irisCompleto<-todo[complete.cases(todo),]
@@ -229,3 +228,23 @@ g3<- datos[datos$grupo==3,]
 prop.table(table(g3$diagnostico))*100
 
 plotcluster(todo[,16:17],km$cluster) #grafica la ubicaciÃ³n de los clusters
+
+
+
+#Correlacion de las variables
+#Correlacion entre cantidad y mes
+cor(todo$cantidad,todo$numero_mes, method = "spearman")
+#Correlacion entre cantidad y departamento 
+cor(todo$cantidad,todo$numero_dep, method = "spearman")
+#Correlacion entre cantidad y CIE10
+cor(todo$cantidad,todo$numero_cie, method = "spearman")
+#Correlacion entre cantidad y diagnostico
+cor(todo$cantidad,todo$numero_diag, method = "spearman")
+#Correlacion entre cantidad y grupo de edad
+cor(todo$cantidad,todo$numero_grupoedad, method = "spearman")
+#Correlacion entre cantidad y genero
+cor(todo$cantidad,todo$numero_gen, method = "spearman")
+
+
+
+
