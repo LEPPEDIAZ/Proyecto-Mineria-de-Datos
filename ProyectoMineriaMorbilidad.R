@@ -104,7 +104,7 @@ groups<-cutree(hc,k=3) #corta el dendograma, determinando el grupo de cada fila
 datos$gruposHC<-groups
 
 
-#Morbilidad por departamento y genero
+#Morbilidad por departamento 
 departamentos<- as.vector(todo$depto)
 departamentos<-unique(departamentos)
 resumen <- aggregate(todo$cantidad,by=list(todo$depto),FUN=length)
@@ -112,11 +112,80 @@ cantidad <- as.vector(resumen[,2])
 barplot(cantidad, names.arg = departamentos,col =topo.colors(22),main = "morbilidad por departamento",las=2,cex.names = 1)
 
 
+#Morbilidad por mes
+Meses<- as.vector(todo$mes)
+Meses<-unique(Meses)
+resumen <- aggregate(todo$cantidad,by=list(todo$mes),FUN=length)
+cantidad <- as.vector(resumen[,2])
+barplot(cantidad, names.arg = Meses,col =topo.colors(6),main = "morbilidad por mes",las=2,cex.names = 1)
+
+
+#Morbilidad por Genero
+Genero<- as.vector(todo$genero)
+Genero<-unique(Genero)
+resumen <- aggregate(todo$cantidad,by=list(todo$genero),FUN=length)
+cantidad <- as.vector(resumen[,2])
+barplot(cantidad, names.arg = Genero,col =topo.colors(2),main = "morbilidad por genero",las=2,cex.names = 1)
+
+
+
+#Morbilidad por Grupo de edad
+Gedad<- as.vector(todo$grupoedad)
+Gedad<-unique(Gedad)
+resumen <- aggregate(todo$cantidad,by=list(todo$grupoedad),FUN=length)
+cantidad <- as.vector(resumen[,2])
+barplot(cantidad, names.arg = Gedad,col =topo.colors(17),main = "morbilidad por grupo de edad",las=2,cex.names = 1)
+
+Gedad<- as.vector(todo$numero_grupoedad)
+Gedad<-unique(Gedad)
+resumen <- aggregate(todo$cantidad,by=list(todo$numero_grupoedad),FUN=length)
+cantidad <- as.vector(resumen[,2])
+barplot(cantidad, names.arg = Gedad,col =topo.colors(17),main = "morbilidad por grupo de edad",las=2,cex.names = 1)
+
+
+
 library(ggplot2) #load ggplot2 library
 todo$numero_dep <- factor(todo$numero_dep) # Create a categorical variable
 todo$numero_gen <- factor(todo$numero_gen) # Create categorical variable
 p <- ggplot(data = todo, aes(x=numero_dep, fill=numero_gen) ) + geom_bar() # Creates stacked bar chart
 p <- p + xlab("Departamentos") + ggtitle("Genero por departamento") # Adds title and labels
+p
+
+
+library(ggplot2) #load ggplot2 library
+todo$mes <- factor(todo$mes) # Create a categorical variable
+todo$grupoedad <- factor(todo$grupoedad) # Create categorical variable
+p <- ggplot(data = todo, aes(x=mes, fill=grupoedad) ) + geom_bar() # Creates stacked bar chart
+p <- p + xlab("Meses") + ggtitle("grupo de edad por mes") # Adds title and labels
+p
+
+unique(todo$mes)
+
+
+library(ggplot2) #load ggplot2 library
+todo$numero_dep <- factor(todo$numero_dep) # Create a categorical variable
+todo$grupoedad <- factor(todo$grupoedad) # Create categorical variable
+p <- ggplot(data = todo, aes(x=numero_dep, fill=grupoedad) ) + geom_bar() # Creates stacked bar chart
+p <- p + xlab("Departamentos") + ggtitle("Grupo de edad por departamento") # Adds title and labels
+p
+
+library(gplots)
+
+
+library(ggplot2) #load ggplot2 library
+todo$numero_dep <- factor(todo$numero_dep) # Create a categorical variable
+todo$mes <- factor(todo$mes) # Create categorical variable
+p <- ggplot(data = todo, aes(x=numero_dep, fill=mes) ) + geom_bar() # Creates stacked bar chart
+p <- p + xlab("Departamentos") + ggtitle("mes  por departamento") # Adds title and labels
+p
+
+
+
+library(ggplot2) #load ggplot2 library
+todo$numero_dep <- factor(todo$numero_dep) # Create a categorical variable
+todo$numero_mes <- factor(todo$numero_mes) # Create categorical variable
+p <- ggplot(data = todo,xlab(as.vector(todo$mes)), aes(x=numero_dep, fill=numero_mes) ) + geom_bar() # Creates stacked bar chart
+p <- p + xlab("Departamentos") + ggtitle("Mes por departamento") # Adds title and labels
 p
 
 library(reshape2)
@@ -128,8 +197,8 @@ ggplot(todo, aes(x = todo$depto, y= todo$cantidad, fill = todo$genero), xlab="Ag
 #CIE10 y departamento
 library(ggplot2) #load ggplot2 library
 todo$numero_dep <- factor(todo$numero_dep) # Create a categorical variable
-todo$cie <- factor(todo$cie) # Create categorical variable
-p <- ggplot(data = todo, aes(x=numero_dep, fill=cie) ) + geom_bar() # Creates stacked bar chart
+todo$numero_cie <- factor(todo$numero_cie) # Create categorical variable
+p <- ggplot(data = todo, aes(x=numero_dep, fill=numero_cie) ) + geom_bar() # Creates stacked bar chart
 p <- p + xlab("Departamentos") + ggtitle("CIE10  por departamento") # Adds title and labels
 p
 
