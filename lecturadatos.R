@@ -276,5 +276,51 @@ todo$clasificiacion <- ifelse(grepl("U",todo$CAUFIN),"22",todo$clasificiacion)
 
 View(todo)
 
-
+View(todo)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "1") , ]
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "2") , ]
+View(todo1)
+View(todo1)
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "3") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "4") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "5") , ]
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "6") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "7") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "8") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "9") , ]
+View(todo)
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "13") , ]
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "15") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "16") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "17") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "18") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "19") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "20") , ]
+View(todo1)
+todo1 <- todo3
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "1") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "2") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "3") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "4") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "5") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "6") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "7") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "8") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "8") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "9") , ]
+View(todo1)
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "13") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "15") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "16") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "17") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "18") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "19") , ]
+todo1 <- todo1[ which( ! todo1$clasificiacion %in% "20") , ]
+View(todo1)
 
