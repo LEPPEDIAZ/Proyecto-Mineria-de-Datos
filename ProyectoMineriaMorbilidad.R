@@ -245,6 +245,33 @@ cor(todo$cantidad,todo$numero_grupoedad, method = "spearman")
 #Correlacion entre cantidad y genero
 cor(todo$cantidad,todo$numero_gen, method = "spearman")
 
+datos<- todofinal
+TodoCompleto<-todofinal[complete.cases(todofinal),]
+km<-kmeans(todofinal[,12:13],3)
+datos$grupo<-km$cluster
+
+g1<- datos[datos$grupo==1,]
+prop.table(table(g1$CAUFIN))*100
+nrow(g1)
+summary(g1)
+
+g2<- datos[datos$grupo==2,]
+prop.table(table(g2$CAUFIN))*100
+g3<- datos[datos$grupo==3,]
+prop.table(table(g3$CAUFIN))*100
+
+plotcluster(todofinal[,1:3],km$cluster)
+#cluster jerarquico
+hc<-hclust(dist(todofinal[,11:12])) #Genera el clustering jerárquico de los datos
+plot(hc) #Genera el dendograma
+rect.hclust(hc,k=3) #Dibuja el corte de los grupos en el gráfico
+groups<-cutree(hc,k=3) #corta el dendograma, determinando el grupo de cada fila
+datos$gruposHC<-groups
+
+
+g1HC<-datos[datos$gruposHC==1,]
+g2HC<-datos[datos$gruposHC==2,]
+g3HC<-datos[datos$gruposHC==3,]
 
 
 
