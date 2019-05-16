@@ -273,5 +273,17 @@ g1HC<-datos[datos$gruposHC==1,]
 g2HC<-datos[datos$gruposHC==2,]
 g3HC<-datos[datos$gruposHC==3,]
 
-
+#cmeans cluster
+fcm<-cmeans(todofinal[,12:13],3)
+datos$FCGrupos<-fcm$cluster
+datos<-cbind(datos,fcm$membership)
+silfcm<-silhouette(fcm$cluster,dist(todofinal[,1:4]))
+mean(silfcm[,3]) #0.54, no es la mejor partición pero no está mal
+#gaussiano
+mc<-Mclust(todofinal[,1:4],3)
+plot(mc, what = "classification", main="MClust Classification")
+datos$mxGau<-mc$classification
+g1MC<-datos[datos$mxGau==1,]
+g2MC<-datos[datos$mxGau==2,]
+g3MC<-datos[datos$mxGau==3,]
 
