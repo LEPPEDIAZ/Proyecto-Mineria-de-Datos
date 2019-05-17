@@ -51,6 +51,7 @@ accuracy_Test <- sum(diag(table_mat)) / sum(table_mat)
 print(paste('Accuracy for test', accuracy_Test))
 
 #MAS PRUEBAS -------------------------------------------------------------------
+todo <- read.csv("estudioenfermedad.csv")
 
 # Create the input data frame.
 input.dat <- todo
